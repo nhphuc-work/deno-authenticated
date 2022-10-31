@@ -11,8 +11,17 @@ export class ProductsService {
 
   getFile(filename: string): StreamableFile {
     const file = createReadStream(
-      join(process.cwd(), `upload/${filename}`),
+      join(process.cwd(),
+      `${this.configServices.get<string>('UPLOAD_URL')}${filename}`)
     )
     return new StreamableFile(file)
+  }
+
+  uploadFile(file: Express.Multer.File) {
+    return {
+      path: file?.path,
+      originName: file?.originalname,
+      name: file?.filename
+    }
   }
 }

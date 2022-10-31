@@ -9,11 +9,7 @@ export class ProductsController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   uploadFile(@UploadedFile() file: Express.Multer.File) {
-    return {
-      path: file?.path,
-      originName: file?.originalname,
-      name: file?.filename
-    }
+    return this.productsService.uploadFile(file)
   }
 
   @Get('file/:filename')
