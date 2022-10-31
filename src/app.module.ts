@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -12,14 +12,18 @@ import { ProductsModule } from './products/products.module';
       envFilePath: '.env'
     }),
     ProductsModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'db',
-      database: 'deno',
-      password: 'deno',
-      username: 'deno',
-      entities: [Product],
-      synchronize: true
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        type: 'mysql',
+        host: configService.get<string>('DB_HOST'),
+        database: configService.get<string>('DB_DATABASE'),
+        password: configService.get<string>('DB_PASSWORD'),
+        username: configService.get<string>('DB_USERNAME'),
+        entities: [Product],
+        synchronize: true
+      })
     })
   ],
   controllers: [AppController],
