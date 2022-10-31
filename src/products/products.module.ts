@@ -1,14 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { ProductsController } from './products.controller';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
     ConfigModule,
-    MulterModule.register({
-      dest: './upload'
+    MulterModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        dest: configService.get<string>('UPLOAD_URL')
+      }),
+      inject: [ConfigService]
     })
   ],
   controllers: [ProductsController],
