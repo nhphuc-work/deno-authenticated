@@ -1,8 +1,6 @@
 import { Controller, Post, UseInterceptors, UploadedFile, Get, Param, StreamableFile } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { createReadStream } from 'fs';
-import { join } from 'path';
 
 @Controller('products')
 export class ProductsController {
@@ -20,8 +18,6 @@ export class ProductsController {
 
   @Get('file/:filename')
   getFile(@Param('filename') filename: string): StreamableFile {
-    const file = createReadStream(join(process.cwd(), `upload/${filename}`));
-    
-    return new StreamableFile(file)
+    return this.productsService.getFile(filename)
   }
 }

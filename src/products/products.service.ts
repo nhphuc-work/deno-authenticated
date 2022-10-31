@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, StreamableFile } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { CreateProductDto } from './dto/create-product.dto';
-import { UpdateProductDto } from './dto/update-product.dto';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @Injectable()
 export class ProductsService {
@@ -9,23 +9,10 @@ export class ProductsService {
     private readonly configServices: ConfigService
   ) {}
 
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
-  }
-
-  findAll() {
-    return this.configServices.get<String>('API_VERSION');
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
-  }
-
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  getFile(filename: string): StreamableFile {
+    const file = createReadStream(
+      join(process.cwd(), `upload/${filename}`),
+    )
+    return new StreamableFile(file)
   }
 }
