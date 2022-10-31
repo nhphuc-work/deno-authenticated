@@ -9,10 +9,10 @@ import { MulterModule } from '@nestjs/platform-express';
     ConfigModule,
     MulterModule.registerAsync({
       imports: [ConfigModule],
+      inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
         dest: configService.get<string>('UPLOAD_URL')
       }),
-      inject: [ConfigService]
     })
   ],
   controllers: [ProductsController],
