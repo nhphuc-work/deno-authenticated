@@ -12,8 +12,8 @@ export class ProductsController {
     return this.productsService.uploadFile(file)
   }
 
-  @Get('file/:filename')
-  getFile(@Param('filename') filename: string): StreamableFile {
-    return this.productsService.getFile(filename)
+  @Get('file/:fileName')
+  getFile(@Param('fileName') fileName: string): StreamableFile {
+    return this.productsService.getFile(fileName)
   }
 }
