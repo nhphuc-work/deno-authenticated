@@ -11,8 +11,8 @@ export class ProductsService {
   constructor(
     private readonly configServices: ConfigService,
     
-    @InjectRepository(Product)
-    private readonly productRepository: Repository<Product>
+    // @InjectRepository(Product)
+    // private readonly productRepository: Repository<Product>
   ) {}
 
   getFile(filename: string): StreamableFile {
@@ -29,9 +29,5 @@ export class ProductsService {
       originName: file?.originalname,
       name: file?.filename
     }
-  }
-
-  async getProducts() {
-    return await this.productRepository.find()
   }
 }
