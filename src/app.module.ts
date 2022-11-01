@@ -22,7 +22,7 @@ import { ProductsModule } from './products/products.module';
         password: configService.get<string>('DB_PASSWORD'),
         username: configService.get<string>('DB_USERNAME'),
         entities: [Product],
-        synchronize: true
+        synchronize: false
       })
     })
   ],
