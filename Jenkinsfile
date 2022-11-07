@@ -1,11 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('build docker images') {
+    stage('ssh server') {
       steps {
-        withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-          sh 'docker build -t deno_authenticated:v10 .'
-          sh 'docker push deno_authenticated:v10'
+        sshagent(['ssh-key']) {
+          sh 'ssh -o StrictHostKeyChecking=no -l root 14.225.204.32 bash deploy.sh'
         }
       }
     }
