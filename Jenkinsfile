@@ -4,8 +4,8 @@ pipeline {
     stage('remove old container and old image') {
       steps {
         withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-          sh 'docker ps -q --filter "name=$deno_api" | xargs -r docker stop'
-          sh 'docker ps -q --filter "name=$deno_api" | xargs -r docker rm'
+          sh 'docker ps -q --filter "name=deno_api" | xargs -r docker stop'
+          sh 'docker ps -q --filter "name=deno_api" | xargs -r docker rm'
         }
       }
     }
