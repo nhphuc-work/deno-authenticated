@@ -9,7 +9,7 @@ pipeline {
     }
     stage('remove images') {
       steps {
-        sh 'docker rmi deno:latest'
+        sh 'docker ps -q --filter "name=deno:latest" | xargs -r docker rmi'
       }
     }
     stage('build images') {
