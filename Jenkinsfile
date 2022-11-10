@@ -22,7 +22,7 @@ pipeline {
     stage('run container') {
       steps {
         sh 'docker run -dp 3000:3000 --name deno_api_1 deno:latest'
-        sh 'docker run -dp 3000:3000 --name deno_api_2 deno:latest'
+        sh 'docker run -dp 3001:3000 --name deno_api_2 deno:latest'
       }
     }
   }
