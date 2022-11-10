@@ -16,7 +16,7 @@ pipeline {
     }
     stage('start docker container') {
       steps {
-        sh 'docker start -dp 3000:3000 --name deno_api deno:latest'
+        sh 'docker run -dp 3000:3000 --name deno_api deno:latest'
       }
     }
   }
