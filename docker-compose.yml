@@ -20,3 +20,6 @@ services:
       - MYSQL_PASSWORD=deno
     volumes:
       - ./data/mysql:/var/lib/mysql
+  networks:
+    default:
+      driver: bridge
