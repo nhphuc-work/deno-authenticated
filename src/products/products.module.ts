@@ -16,7 +16,7 @@ import { Product } from './entities/product.entity';
         dest: configService.get<string>('UPLOAD_URL')
       }),
     }),
-    // TypeOrmModule.forFeature([Product])
+    TypeOrmModule.forFeature([Product])
   ],
   controllers: [ProductsController],
   providers: [ProductsService]
