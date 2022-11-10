@@ -21,6 +21,7 @@ import { ProductsModule } from './products/products.module';
         database: configService.get<string>('DB_DATABASE'),
         password: configService.get<string>('DB_PASSWORD'),
         username: configService.get<string>('DB_USERNAME'),
+        port: configService.get<number>('DB_PORT'),
         entities: [Product],
         synchronize: false
       })
