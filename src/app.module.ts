@@ -12,20 +12,20 @@ import { ProductsModule } from './products/products.module';
       envFilePath: '.env'
     }),
     ProductsModule,
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get<string>('DB_HOST'),
-        database: configService.get<string>('DB_DATABASE'),
-        password: configService.get<string>('DB_PASSWORD'),
-        username: configService.get<string>('DB_USERNAME'),
-        port: configService.get<number>('DB_PORT'),
-        entities: [Product],
-        synchronize: false
-      })
-    })
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   inject: [ConfigService],
+    //   useFactory: async (configService: ConfigService) => ({
+    //     type: 'mysql',
+    //     host: configService.get<string>('DB_HOST'),
+    //     database: configService.get<string>('DB_DATABASE'),
+    //     password: configService.get<string>('DB_PASSWORD'),
+    //     username: configService.get<string>('DB_USERNAME'),
+    //     port: configService.get<number>('DB_PORT'),
+    //     entities: [Product],
+    //     synchronize: false
+    //   })
+    // })
   ],
   controllers: [AppController],
   providers: [AppService],

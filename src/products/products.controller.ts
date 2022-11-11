@@ -16,4 +16,9 @@ export class ProductsController {
   getFile(@Param('fileName') fileName: string): StreamableFile {
     return this.productsService.getFile(fileName)
   }
+
+  @Get('/')
+  getProducts() {
+    return this.productsService.getProducts()
+  }
 }
